@@ -1,0 +1,179 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: GET
+    uri: https://ghibliapi.herokuapp.com/films?fields=url,title
+  response:
+    body:
+      string: "[\n  {\n    \"title\": \"Castle in the Sky\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe\"\
+        \n  },\n  {\n    \"title\": \"Grave of the Fireflies\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/12cfb892-aac0-4c5b-94af-521852e46d6a\"\
+        \n  },\n  {\n    \"title\": \"My Neighbor Totoro\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n  },\n  {\n    \"title\": \"Kiki's Delivery Service\",\n    \"url\": \"\
+        https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e\"\
+        \n  },\n  {\n    \"title\": \"Only Yesterday\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/4e236f34-b981-41c3-8c65-f8c9000b94e7\"\
+        \n  },\n  {\n    \"title\": \"Porco Rosso\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/ebbb6b7c-945c-41ee-a792-de0e43191bd8\"\
+        \n  },\n  {\n    \"title\": \"Pom Poko\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/1b67aa9a-2e4a-45af-ac98-64d6ad15b16c\"\
+        \n  },\n  {\n    \"title\": \"Whisper of the Heart\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/ff24da26-a969-4f0e-ba1e-a122ead6c6e3\"\
+        \n  },\n  {\n    \"title\": \"Princess Mononoke\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n  },\n  {\n    \"title\": \"My Neighbors the Yamadas\",\n    \"url\": \"\
+        https://ghibliapi.herokuapp.com/films/45204234-adfd-45cb-a505-a8e7a676b114\"\
+        \n  },\n  {\n    \"title\": \"Spirited Away\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/dc2e6bd1-8156-4886-adff-b39e6043af0c\"\
+        \n  },\n  {\n    \"title\": \"The Cat Returns\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        \n  },\n  {\n    \"title\": \"Howl's Moving Castle\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/cd3d059c-09f4-4ff3-8d63-bc765a5184fa\"\
+        \n  },\n  {\n    \"title\": \"Tales from Earthsea\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/112c1e67-726f-40b1-ac17-6974127bb9b9\"\
+        \n  },\n  {\n    \"title\": \"Ponyo\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/758bf02e-3122-46e0-884e-67cf83df1786\"\
+        \n  },\n  {\n    \"title\": \"Arrietty\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/2de9426b-914a-4a06-a3a0-5e6d9d3886f6\"\
+        \n  },\n  {\n    \"title\": \"From Up on Poppy Hill\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/45db04e4-304a-4933-9823-33f389e8d74d\"\
+        \n  },\n  {\n    \"title\": \"The Wind Rises\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/67405111-37a5-438f-81cc-4666af60c800\"\
+        \n  },\n  {\n    \"title\": \"The Tale of the Princess Kaguya\",\n    \"url\"\
+        : \"https://ghibliapi.herokuapp.com/films/578ae244-7750-4d9f-867b-f3cd3d6fecf4\"\
+        \n  },\n  {\n    \"title\": \"When Marnie Was There\",\n    \"url\": \"https://ghibliapi.herokuapp.com/films/5fdfb320-2a02-49a7-94ff-5ca418cae602\"\
+        \n  }\n]"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 12 Aug 2020 22:11:54 GMT
+      Etag:
+      - W/"a3f-rtoPZkx7H5fUQeUh6yZvfb/Y/Ig"
+      Expires:
+      - '-1'
+      Pragma:
+      - no-cache
+      Server:
+      - Cowboy
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Origin, Accept-Encoding
+      Via:
+      - 1.1 vegur
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - Express
+      content-length:
+      - '2623'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.24.0
+    method: GET
+    uri: https://ghibliapi.herokuapp.com/people?fields=name,films
+  response:
+    body:
+      string: "[\n  {\n    \"name\": \"Ashitaka\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"San\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Eboshi\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Jigo\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Kohroku\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Gonza\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Hii-sama\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Yakul\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Shishigami\",\n    \"films\": [\n    \
+        \  \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Moro\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/0440483e-ca0e-4120-8c50-4c8cd9b965d6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Jiji\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/ea660b10-85c4-4ae3-8a5f-41cea3648e3e\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Satsuki Kusakabe\",\n    \"films\": [\n\
+        \      \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Mei Kusakabe\",\n    \"films\": [\n  \
+        \    \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Tatsuo Kusakabe\",\n    \"films\": [\n\
+        \      \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Yasuko Kusakabe\",\n    \"films\": [\n\
+        \      \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Granny\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Kanta Ogaki\",\n    \"films\": [\n   \
+        \   \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Totoro\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Chu Totoro\",\n    \"films\": [\n    \
+        \  \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Chibi Totoro\",\n    \"films\": [\n  \
+        \    \"https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Catbus\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/58611129-2dbc-4a81-a72f-77ddfc1b1b49\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Niya\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/2de9426b-914a-4a06-a3a0-5e6d9d3886f6\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Renaldo Moon aka Moon aka Muta\",\n  \
+        \  \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        ,\n      \"https://ghibliapi.herokuapp.com/films/ff24da26-a969-4f0e-ba1e-a122ead6c6e3\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Cat King\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Yuki\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Haru\",\n    \"films\": [\n      \"https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Baron Humbert von Gikkingen\",\n    \"\
+        films\": [\n      \"https://ghibliapi.herokuapp.com/films/ff24da26-a969-4f0e-ba1e-a122ead6c6e3\"\
+        ,\n      \"https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Natori\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/90b72513-afd4-4570-84de-a56c312fdf81\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Colonel Muska\",\n    \"films\": [\n \
+        \     \"https://ghibliapi.herokuapp.com/films/2baf70d1-42bb-4437-b551-e5fed5a87abe\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Porco Rosso\",\n    \"films\": [\n   \
+        \   \"https://ghibliapi.herokuapp.com/films/ebbb6b7c-945c-41ee-a792-de0e43191bd8\"\
+        \n    ]\n  },\n  {\n    \"name\": \"Sosuke\",\n    \"films\": [\n      \"\
+        https://ghibliapi.herokuapp.com/films/758bf02e-3122-46e0-884e-67cf83df1786\"\
+        \n    ]\n  }\n]"
+    headers:
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 12 Aug 2020 22:11:54 GMT
+      Etag:
+      - W/"1167-RUEmh72m97AecX1ybY4gkw1dTRI"
+      Expires:
+      - '-1'
+      Pragma:
+      - no-cache
+      Server:
+      - Cowboy
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Origin, Accept-Encoding
+      Via:
+      - 1.1 vegur
+      X-Content-Type-Options:
+      - nosniff
+      X-Powered-By:
+      - Express
+      content-length:
+      - '4455'
+    status:
+      code: 200
+      message: OK
+version: 1

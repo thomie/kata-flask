@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from flask import Flask
+from flask import Flask, render_template
 import requests
 
 
@@ -11,7 +11,7 @@ def log(s):
     print(s)
 
 
-class Ghibli():
+class Ghibli:
     BASE_URL = "https://ghibliapi.herokuapp.com"
     REQUESTS_TIMEOUT = 10  # seconds
     CACHE_EXPIRE = timedelta(seconds=60)
@@ -49,22 +49,18 @@ def get_films_with_people(ghibli):
     films = ghibli.get_films()
     people = ghibli.get_people()
 
-    films_with_people = {film['url']: {'title': film['title'], 'people': set()} for film in films}
+    films_with_people = {
+        film["url"]: {"title": film["title"], "people": set()} for film in films
+    }
 
     for person in people:
-        for film_url in person['films']:
+        for film_url in person["films"]:
             if film_url in films_with_people:
-                films_with_people[film_url]['people'].add(person['name'])
+                films_with_people[film_url]["people"].add(person["name"])
             else:
                 log(f"Unknown film for person='{person['name']}': '{film_url}'")
 
     return films_with_people
-
-
-def render(films):
-    # "You don’t have to worry about the styling of that page."
-    movies = "".join(f"<li>{film['title']}: {film['people']}</li>\n" for film in films.values())
-    return f"<html>Movies:<ul>{movies}</ul></html>"
 
 
 @app.route("/movies")
@@ -75,7 +71,7 @@ def movies(ghibli=ghibli):
         log(repr(e))
         return "Error connecting to Ghibli API", 500
     else:
-        return render(films)
+        return render_template("ghibli.html", films=films)
 
 
 if __name__ == "__main__":

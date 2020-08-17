@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Movies</title>
+</head>
+<body>
+    <h1>Movies</h1>
+    <ul>
+    {% for film in films.values() -%}
+        <li>{{ film["title"] }}: {% for person in film["people"] %}{{ person }}{{ ", " if not loop.last }}{% endfor %}</li>
+    {% endfor -%}
+    </ul>
+</body>
+</html>

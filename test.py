@@ -2,20 +2,21 @@ import logging
 import time
 
 import vcr
+from jinja2 import Template
 
 import app
 
 my_vcr = vcr.VCR(
-    cassette_library_dir='fixtures/vcr_cassettes',
+    cassette_library_dir="fixtures/vcr_cassettes",
     decode_compressed_response=True,
-    record_mode='once',
+    record_mode="once",
 )
 
 
-app.app.config['TESTING'] = True
+app.app.config["TESTING"] = True
 
 
-class FakeGhibli():
+class FakeGhibli:
     def __init__(self, films, people):
         self.films = films
         self.people = people
@@ -35,41 +36,47 @@ class FakeGhibli():
 
 def test_get_films_with_people():
     fg = FakeGhibli(
-        films=[{'url': 'some_film', 'title': 'some_title'}],
-        people=[{'name': 'some_name', 'films': ['some_film']}]
+        films=[{"url": "some_film", "title": "some_title"}],
+        people=[{"name": "some_name", "films": ["some_film"]}],
     )
-    assert app.get_films_with_people(fg) == {'some_film': {'title': 'some_title', 'people': {'some_name'}}}
+    assert app.get_films_with_people(fg) == {
+        "some_film": {"title": "some_title", "people": {"some_name"}}
+    }
 
 
 def test_unknown_film():
-    fg = FakeGhibli(
-        films=[],
-        people=[{'name': 'some_name', 'films': ['unknown_film']}]
-    )
+    fg = FakeGhibli(films=[], people=[{"name": "some_name", "films": ["unknown_film"]}])
     assert app.get_films_with_people(fg) == {}  # Should not raise KeyError
 
 
 def test_request_exception():
-    fg = FakeGhibli(
-        films=app.requests.HTTPError(),
-        people=[]
-    )
+    fg = FakeGhibli(films=app.requests.HTTPError(), people=[])
     assert app.movies(fg) == ("Error connecting to Ghibli API", 500)
 
-    fg = FakeGhibli(
-        films=[],
-        people=app.requests.ConnectionError()
-    )
+    fg = FakeGhibli(films=[], people=app.requests.ConnectionError())
     assert app.movies(fg) == ("Error connecting to Ghibli API", 500)
 
 
-def test_render():
-    films = {'some_film': {'title': 'some_title', 'people': {'some_name'}}}
-    html = "<html>Movies:<ul><li>some_title: {'some_name'}</li>\n</ul></html>"
-    assert app.render(films) == html 
+def test_html_template():
+    films = {"some_film": {"title": "some_title", "people": {"some_name"}}}
+    with open("templates/ghibli.html") as f:
+        template = Template(f.read())
+    html = """<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Movies</title>
+</head>
+<body>
+    <h1>Movies</h1>
+    <ul>
+    <li>some_title: some_name</li>
+    </ul>
+</body>
+</html>"""
+    assert template.render(films=films) == html
 
 
-@my_vcr.use_cassette('test_ghibli')
+@my_vcr.use_cassette("test_ghibli")
 def test_ghibli():
     films = app.ghibli.get_films()
     assert len(films) == 20
@@ -78,14 +85,14 @@ def test_ghibli():
 
 
 def test_ghibli_should_cache():
-    class FakeResponse():
+    class FakeResponse:
         def raise_for_status(self):
             pass
 
         def json(self):
             return []
 
-    class FakeSession():
+    class FakeSession:
         def __init__(self):
             self.n_requests = 0
 
@@ -104,13 +111,14 @@ def test_ghibli_should_cache():
 
     time.sleep(0.1)
 
-    g.get_films() # Should make a new request.
+    g.get_films()  # Should make a new request.
     assert s.n_requests == 2
 
 
-@my_vcr.use_cassette('test_ghibli')
+@my_vcr.use_cassette("test_ghibli")
 def test_app_integration():
     with app.app.test_client() as c:
         r = c.get("/movies")
         assert r.status_code == 200
         assert r.data
+        print(r.data.decode())

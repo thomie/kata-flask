@@ -1,57 +1,82 @@
 from datetime import datetime, timedelta
-import threading
 
 from flask import Flask
 import requests
 
 
-cache = threading.local()
-cache.timestamp = None
-cache.data = {}
-
-
-BASE_URL = "https://ghibliapi.herokuapp.com"
-CACHE_EXPIRE = timedelta(seconds=60)
-
 app = Flask(__name__)
 
 
-def fetch_data():
-    print('Fetching data')
-    r = requests.get(BASE_URL + "/films?fields=url,title")
-    r.raise_for_status()
-    films = r.json()
+def log(s):
+    print(s)
 
-    r = requests.get(BASE_URL + "/people?fields=name,films")
-    r.raise_for_status()
-    people = r.json()
 
-    data = {film['url']: {'title': film['title'], 'people': set()} for film in films}
+class Ghibli():
+    BASE_URL = "https://ghibliapi.herokuapp.com"
+    REQUESTS_TIMEOUT = 10  # seconds
+    CACHE_EXPIRE = timedelta(seconds=60)
+
+    def __init__(self, session=None):
+        self.session = session or requests.Session()
+        self.cache = {}
+
+    def _get(self, url):
+        r = self.session.get(self.BASE_URL + url, timeout=self.REQUESTS_TIMEOUT)
+        r.raise_for_status()
+        return r.json()
+
+    def get(self, url):
+        utcnow = datetime.utcnow()
+        if url in self.cache:
+            timestamp, result = self.cache[url]
+            if utcnow - timestamp < self.CACHE_EXPIRE:
+                return result
+        result = self._get(url)
+        self.cache[url] = (utcnow, result)
+        return result
+
+    def get_films(self):
+        return self.get("/films?fields=url,title")
+
+    def get_people(self):
+        return self.get("/people?fields=name,films")
+
+
+ghibli = Ghibli()
+
+
+def get_films_with_people(ghibli):
+    films = ghibli.get_films()
+    people = ghibli.get_people()
+
+    films_with_people = {film['url']: {'title': film['title'], 'people': set()} for film in films}
 
     for person in people:
         for film_url in person['films']:
-            if film_url in data:
-                data[film_url]['people'].add(person['name'])
+            if film_url in films_with_people:
+                films_with_people[film_url]['people'].add(person['name'])
             else:
-                print(f"Unknown film for {person['name']}: {film_url}")
+                log(f"Unknown film for person='{person['name']}': '{film_url}'")
 
-    return data
-
-
-def get_data():
-    utcnow = datetime.utcnow()
-    if cache.timestamp is None or utcnow - cache.timestamp > CACHE_EXPIRE:
-        cache.data = fetch_data()
-        cache.timestamp = utcnow
-    return cache.data
+    return films_with_people
 
 
-def render_data(data):
-    movies = "".join(f"<li>{film['title']}: {film['people']}</li>\n" for film in data.values())
+def render(films):
+    # "You don’t have to worry about the styling of that page."
+    movies = "".join(f"<li>{film['title']}: {film['people']}</li>\n" for film in films.values())
     return f"<html>Movies:<ul>{movies}</ul></html>"
 
 
 @app.route("/movies")
-def movies():
-    data = get_data()
-    return render_data(data)
+def movies(ghibli=ghibli):
+    try:
+        films = get_films_with_people(ghibli)
+    except requests.RequestException as e:
+        log(repr(e))
+        return "Error connecting to Ghibli API", 500
+    else:
+        return render(films)
+
+
+if __name__ == "__main__":
+    app.run(port=8000)
